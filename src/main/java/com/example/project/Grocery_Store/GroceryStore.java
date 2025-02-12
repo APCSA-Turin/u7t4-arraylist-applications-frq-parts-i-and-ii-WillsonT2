@@ -1,5 +1,6 @@
 package com.example.project.Grocery_Store;
 import java.util.ArrayList;
+import java.util.Arrays;
 public class GroceryStore {
     /** An array of products normally stocked at the grocery store
      *  Guaranteed not to be null and to contain only non-null entries
@@ -15,7 +16,13 @@ public class GroceryStore {
      *  Precondition: min > 0 */
     public ArrayList<Integer> getReorderList(int min) {
         /* to be implemented in part (a) */
-        return new ArrayList<Integer>();
+        ArrayList<Integer> reorderList = new ArrayList<>();
+        for (int i = 0; i < productsStocked.length; i++){
+            if (productsStocked[i].getQuantity() <= min){
+                reorderList.add(i);
+            }
+        }
+        return reorderList;
     }
 
     /** Returns true if all products named in shoppingList are available for purchase
@@ -25,6 +32,15 @@ public class GroceryStore {
      */
     public boolean checkAvailability(ArrayList<String> shoppingList) {
         /* to be implemented in part (b) */
-        return false;
+        for (int i = 0; i < shoppingList.size(); i++){
+            for (int j = 0; j < productsStocked.length; j++){
+                if (shoppingList.get(i).equals(productsStocked[j].getName())){
+                    if (productsStocked[j].getQuantity() < 1){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 }
